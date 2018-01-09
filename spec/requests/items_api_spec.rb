@@ -34,11 +34,11 @@ RSpec.describe 'Items API' do
       data = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
-      expect(data.first['id']).to eq(item.id)
-      expect(data.first['description']).to eq(item.description)
-      expect(data.first['image_url']).to eq(item.image_url)
-      expect(data.first['created_at']).to be_nil
-      expect(data.first['updated_at']).to be_nil
+      expect(data['id']).to eq(item.id)
+      expect(data['description']).to eq(item.description)
+      expect(data['image_url']).to eq(item.image_url)
+      expect(data['created_at']).to be_nil
+      expect(data['updated_at']).to be_nil
     end
 
     it "deletes the items and a 204 response" do
