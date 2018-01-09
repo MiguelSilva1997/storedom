@@ -25,9 +25,7 @@ RSpec.describe 'Items API' do
       expect(dat.first['created_at']).to be_nil
       expect(dat.first['updated_at']).to be_nil
     end
-  end
 
-  describe "when the user visits /items/1" do
     it "returns the item and a 200 response" do
       item
 
@@ -42,10 +40,8 @@ RSpec.describe 'Items API' do
       expect(dat.first['created_at']).to be_nil
       expect(dat.first['updated_at']).to be_nil
     end
-  end
 
-  describe "when the user deletes an item" do
-    it "returns all the items and a 200 response" do
+    it "deletes the items and a 204 response" do
       item_1
       item
       delete "/api/v1/items/#{item_1.id}"
@@ -55,28 +51,28 @@ RSpec.describe 'Items API' do
       expect(data['status']).to eq(204)
       expect(data['message']).to eq("Successfully deleted #{item_1.name}.")
     end
-  end
 
-  it 'can create an item record response' do
-    post '/api/v1/items', params: { item: { name: "Player",
-                                            description: "best ever",
-                                            image_url: "https://cdn.gobankingrates.com/wp-content/uploads/2017/05/Neymar-848x477.jpg"} }
+    it 'can create an item' do
+      post '/api/v1/items', params: { item: { name: "Player",
+                                              description: "best ever",
+                                              image_url: "https://cdn.gobankingrates.com/wp-content/uploads/2017/05/Neymar-848x477.jpg"} }
 
-    data = JSON.parse(response.body)
+      data = JSON.parse(response.body)
 
-    expect(response.status).to eq(201)
-    expect(data['name']).to eq("Player")
-    expect(data['created_at']).to be_nil
-    expect(data['updated_at']).to be_nil
-  end
+      expect(response.status).to eq(201)
+      expect(data['name']).to eq("Player")
+      expect(data['created_at']).to be_nil
+      expect(data['updated_at']).to be_nil
+    end
 
-  it 'can update an item record response' do
-    item_1
+    it 'can update an item' do
+      item_1
 
-    patch "/api/v1/items/#{item_1.id}",  params: { item: { name: "Stadium"} }
+      patch "/api/v1/items/#{item_1.id}",  params: { item: { name: "Stadium"} }
 
-    data = JSON.parse(response.body)
-    expect(response.status).to eq(202)
-    expect(data['id']).to eq(item_1.id)
+      data = JSON.parse(response.body)
+      expect(response.status).to eq(202)
+      expect(data['id']).to eq(item_1.id)
+    end
   end
 end
