@@ -11,19 +11,19 @@ RSpec.describe 'Items API' do
 
   describe "when the user visits /items" do
     it "returns all the items and a 200 response" do
-      item_1
       item
+      item_1
       get "/api/v1/items"
 
       data = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
       expect(data.count).to eq(2)
-      expect(dat.first['id']).to eq(item.id)
-      expect(dat.first['description']).to eq(item.description)
-      expect(dat.first['image_url']).to eq(item.image_url)
-      expect(dat.first['created_at']).to be_nil
-      expect(dat.first['updated_at']).to be_nil
+      expect(data.first['id']).to eq(item.id)
+      expect(data.first['description']).to eq(item.description)
+      expect(data.first['image_url']).to eq(item.image_url)
+      expect(data.first['created_at']).to be_nil
+      expect(data.first['updated_at']).to be_nil
     end
 
     it "returns the item and a 200 response" do
@@ -34,11 +34,11 @@ RSpec.describe 'Items API' do
       data = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
-      expect(dat.first['id']).to eq(item.id)
-      expect(dat.first['description']).to eq(item.description)
-      expect(dat.first['image_url']).to eq(item.image_url)
-      expect(dat.first['created_at']).to be_nil
-      expect(dat.first['updated_at']).to be_nil
+      expect(data.first['id']).to eq(item.id)
+      expect(data.first['description']).to eq(item.description)
+      expect(data.first['image_url']).to eq(item.image_url)
+      expect(data.first['created_at']).to be_nil
+      expect(data.first['updated_at']).to be_nil
     end
 
     it "deletes the items and a 204 response" do
