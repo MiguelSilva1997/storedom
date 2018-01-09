@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'items#index'
 
+  resources :search
+
   namespace :api do
     namespace :v1 do
       resources :items

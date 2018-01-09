@@ -1,0 +1,12 @@
+<h1><%= @total %> Total Stores</h1><br>
+<ul>
+  <% @stores.each do |store| %>
+    <li class='best_buy_store'>
+      <h4><%= store.name %></h4>
+      Store: <%= store.type %><br>
+      Phone: <%= store.phone %><br>
+      Location: <%= store.city %><br>
+      Distance: <%= store.distance %><br>
+    </li>
+  <% end %>
+</ul>
