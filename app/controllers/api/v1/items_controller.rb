@@ -9,6 +9,26 @@ class Api::V1::ItemsController < Api::V1::ApplicationController
     render status: 200, json: item, serializer: ItemSerializer
   end
 
+  def create
+    item = Item.create(item_params)
+    render status: 201, json: item, serializer: ItemSerializer
+  end
+
+
+  def update
+    item.update(item_params)
+    render status: 202, json: item, serializer: ItemSerializer
+  end
+
+  def destroy
+    item.destroy
+    render json: {
+      flash: "Item was deleted",
+      status: 204
+    }
+  end
+
+
   private
     def item
       @item = Item.find(params[:id])

@@ -49,13 +49,13 @@ RSpec.describe 'Items API' do
       data = JSON.parse(response.body)
 
       expect(data['status']).to eq(204)
-      expect(data['message']).to eq("Successfully deleted #{item_1.name}.")
+      expect(data['flash']).to eq("Item was deleted")
     end
 
     it 'can create an item' do
-      post '/api/v1/items', params: { item: { name: "Player",
-                                              description: "best ever",
-                                              image_url: "https://cdn.gobankingrates.com/wp-content/uploads/2017/05/Neymar-848x477.jpg"} }
+      post '/api/v1/items', { item: { name: "Player",
+                                      description: "best ever",
+                                      image_url: "https://cdn.gobankingrates.com/wp-content/uploads/2017/05/Neymar-848x477.jpg"} }
 
       data = JSON.parse(response.body)
 
@@ -68,7 +68,7 @@ RSpec.describe 'Items API' do
     it 'can update an item' do
       item_1
 
-      patch "/api/v1/items/#{item_1.id}",  params: { item: { name: "Stadium"} }
+      patch "/api/v1/items/#{item_1.id}", { item: { name: "Stadium"} }
 
       data = JSON.parse(response.body)
       expect(response.status).to eq(202)
